@@ -1,4 +1,6 @@
-package net.mbl.demo.concurrentdemo.lock;
+package net.mbl.demo.concurrentdemo.lock.demo1;
+
+import net.mbl.demo.concurrentdemo.lock.LockResource;
 
 import java.util.concurrent.locks.Condition;
 import java.util.concurrent.locks.ReentrantLock;
