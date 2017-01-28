@@ -1,0 +1,20 @@
+syntax = "proto2";
+
+package alluxio.proto.journal;
+option java_package = "alluxio.proto.journal";
+
+import "journal/block.proto";
+import "journal/file.proto";
+import "journal/key_value.proto";
+import "journal/lineage.proto";
+message Order
+{
+//  required int32 time = 1;
+//  required int32 userid = 2;
+//  required float price = 3;
+//  optional string desc = 4;
+  oneof entry {
+    AddMountPointEntry add_mount_point = 2;
+    BlockContainerIdGeneratorEntry block_container_id_generator = 3;
+  }
+}
