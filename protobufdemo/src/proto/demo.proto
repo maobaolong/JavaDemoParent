@@ -5,8 +5,7 @@ option java_package = "alluxio.proto.journal";
 
 import "journal/block.proto";
 import "journal/file.proto";
-import "journal/key_value.proto";
-import "journal/lineage.proto";
+
 message Order
 {
 //  required int32 time = 1;
