@@ -21,6 +21,9 @@
     <module>thriftdemo</module>
     <module>concurrentdemo</module>
     <module>heartbeatdemo</module>
+    <module>protobufdemo</module>
+    <module>nettydemo</module>
+    <module>jstackdemo</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>
