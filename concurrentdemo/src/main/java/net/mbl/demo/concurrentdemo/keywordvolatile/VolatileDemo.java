@@ -11,13 +11,17 @@ public class VolatileDemo {
   }
 
   public static void main(String[] args) {
-    new Thread(() -> {
-      for(int m=0;m<1000000;m++)
-        one();
-    }).start();
-    new Thread(() -> {
-      for(int m=0;m<1000000;m++)
-        two();
-    }).start();
+    new Thread(){
+      public void run() {
+        for (int m = 0; m < 1000000; m++)
+          one();
+      }
+    }.start();
+    new Thread(){
+      public void run() {
+        for (int m = 0; m < 1000000; m++)
+          two();
+      }
+    }.start();
   }
 }
