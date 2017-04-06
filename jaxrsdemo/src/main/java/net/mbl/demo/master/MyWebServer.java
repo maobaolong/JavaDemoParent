@@ -24,7 +24,8 @@ public final class MyWebServer {
    */
   public static void main(String[] args) {
 
-    MasterWebServer mWebServer = new MasterWebServer("MasterWebServer",new InetSocketAddress("localhost",19999));
+    MasterWebServer mWebServer = new MasterWebServer("MasterWebServer",new InetSocketAddress
+        ("localhost",1234));
 
     // start web ui
     mWebServer.start();

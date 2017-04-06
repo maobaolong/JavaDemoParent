@@ -64,6 +64,8 @@ public class App {
               System. out.println(i);
             }
             lock.notifyAll();
+            int a = 1;
+            a++;
           }
         }
       }
@@ -162,6 +164,6 @@ public class App {
     System.out.println("Hello World!");
 //    RUNNABLE();
 //    BLOCKED();
-    WAITING_SLEEP();
+    WAITING_FOR();
   }
 }

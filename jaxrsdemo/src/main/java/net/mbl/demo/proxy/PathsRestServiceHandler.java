@@ -45,11 +45,11 @@ public final class PathsRestServiceHandler {
   @ReturnType("java.lang.Void")
   @Consumes(MediaType.APPLICATION_JSON)
   public Response createDirectory(@PathParam("path") final String path) {
-    return RestUtils.call(new RestUtils.RestCallable<Void>() {
+    return RestUtils.call(new RestUtils.RestCallable<String>() {
       @Override
-      public Void call() throws Exception {
+      public String call() throws Exception {
 
-        return null;
+        return path;
       }
     });
   }

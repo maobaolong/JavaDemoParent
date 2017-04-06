@@ -60,7 +60,8 @@ public final class MyProxy implements Server {
 
     @Override
     public void start() throws Exception {
-        mWebServer = new ProxyWebServer("ProxyWebServer",new InetSocketAddress("localhost",39999));
+        mWebServer = new ProxyWebServer("ProxyWebServer",new InetSocketAddress("localhost",
+            1235));
         // start web server
         mWebServer.start();
     }

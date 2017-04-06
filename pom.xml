@@ -24,6 +24,7 @@
     <module>protobufdemo</module>
     <module>nettydemo</module>
     <module>jstackdemo</module>
+    <module>jsondemo</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>
