@@ -25,6 +25,7 @@
     <module>nettydemo</module>
     <module>jstackdemo</module>
     <module>jsondemo</module>
+      <module>misc</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>
