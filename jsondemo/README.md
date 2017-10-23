@@ -11,5 +11,5 @@ mvn compiler:compile
 ## how to run
 
 ```bash
-mvn exec:java -Dexec.mainClass="net.mbl.demo.App"
+mvn exec:java -Dexec.mainClass="net.mbl.demo.NioBufferDemo"
 ```

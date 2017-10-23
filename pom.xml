@@ -26,6 +26,10 @@
     <module>jstackdemo</module>
     <module>jsondemo</module>
       <module>misc</module>
+    <module>niodemo</module>
+    <module>common</module>
+    <module>gcdemo</module>
+      <module>classLoaderDemo</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>
@@ -66,6 +70,33 @@
         <version>${powermock.version}</version>
         <scope>test</scope>
       </dependency>
+      <!--
+         Dependency for FindBugs Plugin annotations.
+         This enables @ThreadSafe @ThreadNotSafe @SuppressFBWarnings.
+         This library is a super set of com.google.code.findbugs:jsr305
+         Note that this package can be unnecessary for runtime, and the
+         'provided' scope makes it available for compilation and test,
+         but not be packaged into the jar.
+       -->
+      <dependency>
+        <groupId>com.google.code.findbugs</groupId>
+        <artifactId>annotations</artifactId>
+        <version>3.0.1</version>
+        <scope>provided</scope>
+      </dependency>
     </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.6.0</version>
+        <configuration>
+          <source>1.7</source>
+          <target>1.7</target>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 
 </project>
