@@ -30,6 +30,8 @@
     <module>common</module>
     <module>gcdemo</module>
       <module>classLoaderDemo</module>
+      <module>serviceloader</module>
+    <module>jnidemo</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>

@@ -29,5 +29,12 @@
             <artifactId>httpclient</artifactId>
             <version>RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.alluxio</groupId>
+            <artifactId>alluxio-assembly</artifactId>
+            <version>1.5.1-SNAPSHOT</version>
+            <scope>system</scope>
+            <systemPath>${project.basedir}/libs/alluxio-assembly-client-1.5.1-SNAPSHOT-jar-with-dependencies.jar</systemPath>
+        </dependency>
     </dependencies>
 </project>
