@@ -2,6 +2,9 @@ package net.mbl.demo.concurrentdemo.threadpool;
 
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * 创建一个定长线程池，可控制线程最大并发数，超出的线程会在队列中等待
@@ -10,16 +13,19 @@ import java.util.concurrent.Executors;
  */
 public class FixedThreadPoolDemo {
   public static void main(String[] args) {
-    ExecutorService fixedThreadPool = Executors.newFixedThreadPool(3);
+
+    ThreadPoolExecutor fixedThreadPool = new ThreadPoolExecutor(3, 3,
+        100000L, TimeUnit.MILLISECONDS,
+        new LinkedBlockingQueue<Runnable>());
     for (int i = 0; i < 10; i++) {
       final int index = i;
-      fixedThreadPool.execute(new Runnable() {
+      fixedThreadPool.submit(new Runnable() {
 
         @Override
         public void run() {
           try {
             System.out.println(index);
-            Thread.sleep(2000);
+            Thread.sleep(4000);
           } catch (InterruptedException e) {
             // TODO Auto-generated catch block
             e.printStackTrace();
@@ -27,5 +33,41 @@ public class FixedThreadPoolDemo {
         }
       });
     }
+    try {
+      Thread.sleep(1000L);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    fixedThreadPool.setCorePoolSize(1);
+    fixedThreadPool.setMaximumPoolSize(1);
+    try {
+      Thread.sleep(10000L);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    fixedThreadPool.setCorePoolSize(4);
+    fixedThreadPool.setMaximumPoolSize(4);
+    try {
+      Thread.sleep(4000L);
+    } catch (InterruptedException e) {
+      e.printStackTrace();
+    }
+    for (int i = 10; i < 20; i++) {
+      final int index = i;
+      fixedThreadPool.submit(new Runnable() {
+
+        @Override
+        public void run() {
+          try {
+            System.out.println(index);
+            Thread.sleep(4000);
+          } catch (InterruptedException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+          }
+        }
+      });
+    }
+
   }
 }

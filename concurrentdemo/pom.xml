@@ -41,5 +41,14 @@
       <artifactId>annotations</artifactId>
       <version>3.0.1</version>
     </dependency>
+    <dependency>
+      <groupId>org.eclipse.core</groupId>
+      <artifactId>org.eclipse.core.runtime</artifactId>
+      <version>3.7.0</version>
+    </dependency>
+    <dependency>
+      <groupId>org.eclipse.ui</groupId>
+      <artifactId>org.eclipse.ui</artifactId>
+    </dependency>
   </dependencies>
 </project>
