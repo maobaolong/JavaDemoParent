@@ -62,6 +62,7 @@ public class App
     }
     public static void main( String[] args ) throws IOException, InterruptedException, URISyntaxException {
         URIBuilder uriBuilder = new URIBuilder("http://bdp.jd.com/api/urm/sms/send.ajax?appCode=bdpeye.jd.com&token=OR1r7ZRV85A@%26SoygtRw%26dMxFF%5Eu0%2A$W&erp=maobaolong&content=aaabbbcccddd");
+        Thread.sleep(0);
 //        Thread.sleep(-2);
         try {
             test();

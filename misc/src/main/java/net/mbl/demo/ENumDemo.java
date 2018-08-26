@@ -1,11 +1,14 @@
 package net.mbl.demo;
 
+
 /**
  * Created by mbl on 31/05/2018.
  */
 public class ENumDemo {
   public static void main(String[] args) {
     System.out.println(FailureDomain.NODE.name());
+    FailureDomain failureDomain = FailureDomain.valueOf("RACK");
+    System.out.println(failureDomain);
   }
 
   protected enum FailureDomain {

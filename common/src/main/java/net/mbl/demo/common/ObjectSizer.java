@@ -67,8 +67,8 @@ public final class ObjectSizer {
   }
 
   // PRIVATE
-  private static int fSAMPLE_SIZE = 100;
-  private static long fSLEEP_INTERVAL = 100;
+  private static int fSAMPLE_SIZE = 1000;
+  private static long fSLEEP_INTERVAL = 1000;
 
   private static void log(String aMessage){
     System.out.println(aMessage);

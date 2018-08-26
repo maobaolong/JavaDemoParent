@@ -32,6 +32,7 @@
       <module>classLoaderDemo</module>
       <module>serviceloader</module>
     <module>jnidemo</module>
+    <module>jvmdemo</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>

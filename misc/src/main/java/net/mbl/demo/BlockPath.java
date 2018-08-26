@@ -23,16 +23,28 @@ public class BlockPath {
     return new File(root, path);
   }
   public static void main(String[] args) {
-    String blkId = "blk_7171496577";
-    String bpId = "BP-1676431880-172.22.90.103-1462042499431";
-    if (args.length > 3) {
-      bpId = args[1];
-      blkId = args[2];
-    }
+    String blkIds = "blk_8407642885";
+    String bpId = "BP-1869567922-172.16.172.37-1470393241388";
     String prefix = "/data*/dfs/current/" + bpId + "/current/finalized/";
     System.out.println("prefix = " + prefix);
-    System.out.println("blkId = " + blkId);
-    File f = idToBlockDir(new File(prefix), Long.parseLong(blkId.substring(4)));
-    System.out.println(f + "/" + blkId);
+    for (String blkId : blkIds.split(",")) {
+      File f = idToBlockDir(new File(prefix), Long.parseLong(blkId.substring(4)));
+      System.out.println(f + "/" + blkId);
+    }
   }
+
+
+//  public static void main(String[] args) {
+//    String blkId = "blk_1149330537";
+//    String bpId = "BP-777948004-10.198.24.235-1518587510557";
+//    if (args.length > 3) {
+//      bpId = args[1];
+//      blkId = args[2];
+//    }
+//    String prefix = "/data*/dfs/current/" + bpId + "/current/finalized/";
+//    System.out.println("prefix = " + prefix);
+//    System.out.println("blkId = " + blkId);
+//    File f = idToBlockDir(new File(prefix), Long.parseLong(blkId.substring(4)));
+//    System.out.println(f + "/" + blkId);
+//  }
 }
