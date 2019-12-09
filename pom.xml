@@ -37,6 +37,7 @@
     <module>jnidemo</module>
     <module>jvmdemo</module>
     <module>interview</module>
+    <module>grpc</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>
