@@ -18,5 +18,5 @@ message UnaryResponse{
 }
 service GrpcService{
     // 一对一服务请求
-    rpc SendUnaryRequest(UnaryRequest) returns(UnaryResponse);
+    rpc sendUnaryRequest(UnaryRequest) returns(UnaryResponse);
 }
