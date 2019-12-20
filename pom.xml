@@ -38,6 +38,7 @@
     <module>jvmdemo</module>
     <module>interview</module>
     <module>grpc</module>
+      <module>rocksdbdemo</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>
