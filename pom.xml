@@ -40,6 +40,7 @@
     <module>grpc</module>
       <module>rocksdbdemo</module>
       <module>algorithm</module>
+      <module>stateless4j</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>
