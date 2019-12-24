@@ -41,6 +41,7 @@
       <module>rocksdbdemo</module>
       <module>algorithm</module>
       <module>stateless4j</module>
+      <module>yarnstatemachine</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>
