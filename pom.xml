@@ -39,6 +39,7 @@
     <module>interview</module>
     <module>grpc</module>
       <module>rocksdbdemo</module>
+      <module>algorithm</module>
   </modules>
   <dependencyManagement>
   </dependencyManagement>
