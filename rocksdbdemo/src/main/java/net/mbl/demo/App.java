@@ -7,35 +7,21 @@ import org.apache.hadoop.hdds.utils.db.DBStoreBuilder;
 import org.apache.hadoop.hdds.utils.db.RocksDBConfiguration;
 import org.apache.hadoop.hdds.utils.db.Table;
 import org.apache.hadoop.hdds.utils.db.TableIterator;
-import org.rocksdb.RocksDB;
-import org.apache.commons.io.FilenameUtils;
 
 import java.io.File;
+import java.io.IOException;
 import java.nio.file.Paths;
-
-
+import java.util.concurrent.LinkedBlockingQueue;
+import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
+import java.util.stream.IntStream;
 
 /**
  * Hello world!
  */
 public class App {
-    static {
-        RocksDB.loadLibrary();
-    }
-
-    static RocksDB rocksDB;
-    static String path = FilenameUtils.concat("/tmp/rocksdb-dirs", "testdb");
-    ;
 
     public static void main(String[] args) throws Exception {
-//        Options options = new Options();
-//        options.setCreateIfMissing(true);
-//        rocksDB = RocksDB.open(options, path);
-//        RocksIterator iter = rocksDB.newIterator();
-//        for (iter.seekToFirst(); iter.isValid(); iter.next()) {
-//            System.out.println("iter key:" + new String(iter.key()) + ", iter value:" + new String(iter.value()));
-//        }
-
         OzoneConfiguration ozoneConfiguration = new OzoneConfiguration();
         RocksDBConfiguration rocksDBConfiguration =
                 ozoneConfiguration.getObject(RocksDBConfiguration.class);
@@ -46,9 +32,24 @@ public class App {
         Table<String, String> table = dbStore.getTable("test", String.class, String.class);
         table.put("a", "1");
         table.put("b", "2");
+        table.put("b", "3");
+        table.put("c", "4");
+        table.delete("a");
+        ThreadPoolExecutor tp = new ThreadPoolExecutor(100, 100,
+                0L, TimeUnit.MILLISECONDS,
+                new LinkedBlockingQueue<>());
+        IntStream.range(0, 100).forEach(i -> tp.submit(() -> {
+            try {
+                table.put(String.valueOf(i), "gaga");
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }));
+        System.out.println("ok");
         TableIterator<String, ? extends Table.KeyValue<String, String>> it = table.iterator();
         for (it.seekToFirst(); it.hasNext(); it.next()) {
             System.out.println("iter key:" + it.key() + ", iter value:" + it.value().getValue());
         }
+        System.out.println(table.getEstimatedKeyCount());
     }
 }

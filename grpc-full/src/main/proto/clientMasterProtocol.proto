@@ -1,0 +1,32 @@
+syntax = "proto2";
+
+option java_package = "net.mbl.grpcfull.common.proto";
+option java_outer_classname = "ClientMasterProtocolProtos";
+option java_generic_services = false;
+option java_generate_equals_and_hash = true;
+
+message EndRequestProto {
+    required string id = 1;
+}
+
+message MasterResponseProto {
+    required bool success = 1;
+    optional string message = 2;
+    optional int32 errorCode = 3;
+}
+
+message GetExtraConfigResponseProto {
+    required bool success = 1;
+    optional string message = 2;
+    optional int32 errorCode = 3;
+    map<string,string> configurations = 4;
+}
+
+message GetExtraConfigRequestProto {
+    required string id = 1;
+}
+
+service ClientMasterServiceProtocol {
+    rpc getExtraConfig(GetExtraConfigRequestProto) returns (GetExtraConfigResponseProto);
+    rpc end(EndRequestProto) returns (MasterResponseProto);
+}

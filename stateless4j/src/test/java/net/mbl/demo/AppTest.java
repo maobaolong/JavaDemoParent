@@ -7,10 +7,10 @@ import com.github.oxo42.stateless4j.StateMachineConfig;
 import org.junit.Test;
 
 public class AppTest {
-
+    StateMachineConfig<State, Trigger> phoneCallConfig = new StateMachineConfig<>();
+    StateMachine<State, Trigger> phoneCall;
     @Test
     public void testPhoneRings() throws InterruptedException {
-        StateMachineConfig<State, Trigger> phoneCallConfig = new StateMachineConfig<>();
 
         phoneCallConfig.configure(State.OffHook)
                 .permit(Trigger.CallDialed, State.Ringing)
@@ -32,7 +32,7 @@ public class AppTest {
 
         // ...
 
-        StateMachine<State, Trigger> phoneCall = new StateMachine<>(State.OffHook, phoneCallConfig);
+        phoneCall = new StateMachine<>(State.OffHook, phoneCallConfig);
 
         phoneCall.fire(Trigger.CallDialed);
         assertEquals(State.Ringing, phoneCall.getState());
@@ -63,6 +63,8 @@ public class AppTest {
 
     private void exitHangup() {
         System.out.println("exit hang up");
+
+
     }
 
     private void enterHangup() {

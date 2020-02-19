@@ -11,27 +11,38 @@
 
   <artifactId>grpc</artifactId>
 
+  <properties>
+    <protobuf.version>3.5.1</protobuf.version>
+    <grpc.version>1.17.1</grpc.version>
+  </properties>
+
   <dependencies>
     <!-- 添加grpc相关依赖包 -->
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-netty</artifactId>
-      <version>1.0.0</version>
+      <version>${grpc.version}</version>
+      <exclusions>
+        <exclusion>
+          <artifactId>error_prone_annotations</artifactId>
+          <groupId>com.google.errorprone</groupId>
+        </exclusion>
+      </exclusions>
     </dependency>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-protobuf</artifactId>
-      <version>1.0.0</version>
+      <version>${grpc.version}</version>
     </dependency>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-stub</artifactId>
-      <version>1.0.0</version>
+      <version>${grpc.version}</version>
     </dependency>
     <dependency>
       <groupId>io.grpc</groupId>
       <artifactId>grpc-all</artifactId>
-      <version>0.13.2</version>
+      <version>${grpc.version}</version>
     </dependency>
   </dependencies>
   <!-- proto自动生成java文件所需的编译插件 -->
@@ -49,10 +60,10 @@
         <artifactId>protobuf-maven-plugin</artifactId>
         <version>0.5.0</version>
         <configuration>
-          <protocArtifact>com.google.protobuf:protoc:3.0.0:exe:${os.detected.classifier}
+          <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
           </protocArtifact>
           <pluginId>grpc-java</pluginId>
-          <pluginArtifact>io.grpc:protoc-gen-grpc-java:1.0.0:exe:${os.detected.classifier}
+          <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
           </pluginArtifact>
         </configuration>
         <executions>

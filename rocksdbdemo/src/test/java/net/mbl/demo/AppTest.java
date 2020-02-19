@@ -2,12 +2,13 @@ package net.mbl.demo;
 
 import org.apache.commons.io.FileUtils;
 import org.junit.After;
-import org.junit.Before;
+import org.junit.Assert;
 import org.junit.Test;
 import org.rocksdb.ColumnFamilyDescriptor;
 import org.rocksdb.ColumnFamilyHandle;
 import org.rocksdb.ColumnFamilyOptions;
 import org.rocksdb.DBOptions;
+import org.rocksdb.HdfsEnv;
 import org.rocksdb.Options;
 import org.rocksdb.RocksDB;
 import org.rocksdb.RocksDBException;
@@ -152,5 +153,11 @@ public class AppTest {
         for (iter.seekToFirst(); iter.isValid(); iter.next()) {
             System.out.println(new String(iter.key()) + ":" + new String(iter.value()));
         }
+    }
+
+    @Test
+    public void testHdfsEnvRocksDB() {
+        HdfsEnv env = new HdfsEnv("file:///tmp/a.db");
+        Assert.assertNotNull(env);
     }
 }
