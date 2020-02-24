@@ -1,0 +1,17 @@
+syntax = "proto2";
+
+option java_package = "net.mbl.grpcfull.common.proto";
+option java_outer_classname = "VersionProto";
+option java_generic_services = false;
+option java_generate_equals_and_hash = true;
+
+message GetServiceVersionPRequest {
+}
+
+message GetServiceVersionPResponse {
+    optional int64 version = 1;
+}
+
+service ServiceVersionClientService {
+    rpc getServiceVersion(GetServiceVersionPRequest) returns (GetServiceVersionPResponse);
+}

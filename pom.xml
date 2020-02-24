@@ -11,12 +11,54 @@
   <url>http://maven.apache.org</url>
 
   <properties>
+    <rootPOM>${basedir}/</rootPOM>
+    <revision>0.0.1-SNAPSHOT</revision>
+
+    <protobuf.version>3.5.1</protobuf.version>
+    <grpc.version>1.17.1</grpc.version>
+
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    <junit.version>4.12</junit.version>
-    <powermock.version>1.6.1</powermock.version>
-    <maven.compiler.source>1.8</maven.compiler.source> 
-    <maven.compiler.target>1.8</maven.compiler.target> 
-    <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion> 
+    <maven.compiler.compilerVersion>1.8</maven.compiler.compilerVersion>
+    <maven.compiler.source>1.8</maven.compiler.source>
+    <maven.compiler.target>1.8</maven.compiler.target>
+    <maven.plugin-tools.version>3.6.0</maven.plugin-tools.version>
+    <maven-checkstyle-plugin.version>3.0.0</maven-checkstyle-plugin.version>
+    <version.maven.model>3.3.9</version.maven.model>
+    <checkstyle.version>8.20</checkstyle.version>
+    <findbugs.version>3.0.5</findbugs.version>
+    <spotbugs.version>3.1.0-RC1</spotbugs.version>
+
+    <version.fastjson>1.2.48</version.fastjson>
+    <version.guava>28.0-jre</version.guava>
+    <version.commons.lang>2.6</version.commons.lang>
+    <version.commons.lang3>3.7</version.commons.lang3>
+    <version.commons.logging>1.2</version.commons.logging>
+    <version.commons.collections>3.2.2</version.commons.collections>
+    <version.slf4j.api>1.7.25</version.slf4j.api>
+
+    <maven-jar-plugin.version>2.5</maven-jar-plugin.version>
+    <version.encryption>1.0.2-SNAPSHOT</version.encryption>
+    <version.jopt.simple>5.0.4</version.jopt.simple>
+    <version.reflections>0.9.10</version.reflections>
+    <version.log4j>2.5</version.log4j>
+    <version.jackson>2.9.9</version.jackson>
+    <version.codehaus.jackson>1.9.13</version.codehaus.jackson>
+    <version.jetty>9.3.24.v20180605</version.jetty>
+
+    <version.hadoop>3.2.1</version.hadoop>
+    <version.hadoop.hdds>0.5.0-SNAPSHOT</version.hadoop.hdds>
+
+    <!-- Test package version -->
+    <version.junit>4.12</version.junit>
+    <version.mock>1.38</version.mock>
+    <version.mockito.core>2.7.14</version.mockito.core>
+    <version.powermock>1.7.4</version.powermock>
+    <version.powermock-module-junit4>${version.powermock}</version.powermock-module-junit4>
+    <version.powermock-api-mockito2>${version.powermock}</version.powermock-api-mockito2>
+    <avro-version>0.1.2-SNAPSHOT</avro-version>
+
+    <version.springboot>4.1.3.RELEASE</version.springboot>
+    <jacoco.version>0.8.5</jacoco.version>
   </properties>
 
   <modules>
@@ -38,15 +80,64 @@
     <module>jvmdemo</module>
     <module>interview</module>
     <module>grpc</module>
-    <module>stateless4j</module>
+      <module>rocksdbdemo</module>
+      <module>algorithm</module>
+      <module>stateless4j</module>
+      <module>yarnstatemachine</module>
+      <module>grpc-full</module>
   </modules>
   <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>org.projectlombok</groupId>
+        <artifactId>lombok</artifactId>
+        <version>1.18.8</version>
+      </dependency>
+      <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-netty</artifactId>
+        <version>${grpc.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>error_prone_annotations</artifactId>
+            <groupId>com.google.errorprone</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+      <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-protobuf</artifactId>
+        <version>${grpc.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-stub</artifactId>
+        <version>${grpc.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>io.grpc</groupId>
+        <artifactId>grpc-all</artifactId>
+        <version>${grpc.version}</version>
+      </dependency>
+
+      <dependency>
+        <groupId>com.google.guava</groupId>
+        <artifactId>guava</artifactId>
+        <version>${version.guava}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>jsr305</artifactId>
+            <groupId>com.google.code.findbugs</groupId>
+          </exclusion>
+        </exclusions>
+      </dependency>
+    </dependencies>
   </dependencyManagement>
     <dependencies>
       <dependency>
         <groupId>junit</groupId>
         <artifactId>junit</artifactId>
-        <version>${junit.version}</version>
+        <version>${version.junit}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
@@ -58,25 +149,25 @@
       <dependency>
         <groupId>org.powermock</groupId>
         <artifactId>powermock-api-mockito</artifactId>
-        <version>${powermock.version}</version>
+        <version>${version.powermock}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.powermock</groupId>
         <artifactId>powermock-core</artifactId>
-        <version>${powermock.version}</version>
+        <version>${version.powermock}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.powermock</groupId>
         <artifactId>powermock-module-junit4</artifactId>
-        <version>${powermock.version}</version>
+        <version>${version.powermock}</version>
         <scope>test</scope>
       </dependency>
       <dependency>
         <groupId>org.powermock</groupId>
         <artifactId>powermock-reflect</artifactId>
-        <version>${powermock.version}</version>
+        <version>${version.powermock}</version>
         <scope>test</scope>
       </dependency>
       <!--
@@ -95,17 +186,385 @@
       </dependency>
     </dependencies>
   <build>
+
+    <extensions>
+      <extension>
+        <groupId>kr.motd.maven</groupId>
+        <artifactId>os-maven-plugin</artifactId>
+        <version>1.4.1.Final</version>
+      </extension>
+    </extensions>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-assembly-plugin</artifactId>
+          <version>3.1.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-source-plugin</artifactId>
+          <version>3.0.1</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>3.7.0</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-surefire-plugin</artifactId>
+          <version>2.19.1</version>
+          <configuration>
+            <testFailureIgnore>false</testFailureIgnore>
+            <forkMode>once</forkMode>
+            <argLine>
+              -javaagent:${settings.localRepository}/org/jmockit/jmockit/${version.mock}/jmockit-${version.mock}.jar
+            </argLine>
+            <systemPropertyVariables>
+              <alluxio.test.mode>true</alluxio.test.mode>
+              <jacoco-agent.append>true</jacoco-agent.append>
+              <jacoco-agent.destfile>${basedir}/target/jacoco.exec</jacoco-agent.destfile>
+            </systemPropertyVariables>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>versions-maven-plugin</artifactId>
+          <version>2.3</version>
+          <configuration>
+            <generateBackupPoms>false</generateBackupPoms>
+          </configuration>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-plugin-plugin</artifactId>
+          <version>${maven.plugin-tools.version}</version>
+          <executions>
+            <execution>
+              <id>default-descriptor</id>
+              <phase>compile</phase>
+            </execution>
+          </executions>
+        </plugin>
+        <!--<plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-checkstyle-plugin</artifactId>
+          <version>${maven-checkstyle-plugin.version}</version>
+          <dependencies>
+            <dependency>
+              <groupId>com.puppycrawl.tools</groupId>
+              <artifactId>checkstyle</artifactId>
+              <version>${checkstyle.version}</version>
+            </dependency>
+          </dependencies>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>findbugs-maven-plugin</artifactId>
+          <version>${findbugs.version}</version>
+        </plugin>-->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-enforcer-plugin</artifactId>
+          <version>1.4</version>
+        </plugin>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-antrun-plugin</artifactId>
+          <version>1.8</version>
+        </plugin>
+        <!-- internal plugins -->
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-jar-plugin</artifactId>
+          <version>${maven-jar-plugin.version}</version>
+        </plugin>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>1.2.0.RELEASE</version>
+        </plugin>
+        <plugin>
+          <groupId>pl.project13.maven</groupId>
+          <artifactId>git-commit-id-plugin</artifactId>
+          <version>3.0.1</version>
+          <executions>
+            <execution>
+              <goals>
+                <goal>revision</goal>
+              </goals>
+            </execution>
+          </executions>
+          <configuration>
+            <verbose>false</verbose>
+            <generateGitPropertiesFile>false</generateGitPropertiesFile>
+            <injectAllReactorProjects>false</injectAllReactorProjects>
+            <validationShouldFailIfNoMatch>false</validationShouldFailIfNoMatch>
+            <failOnNoGitDirectory>false</failOnNoGitDirectory>
+            <failOnUnableToExtractRepoInfo>false</failOnUnableToExtractRepoInfo>
+          </configuration>
+        </plugin>
+
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>templating-maven-plugin</artifactId>
+          <version>1.0.0</version>
+          <executions>
+            <execution>
+              <id>filter-src</id>
+              <goals>
+                <goal>filter-sources</goal>
+              </goals>
+              <configuration>
+                <sourceDirectory>${basedir}/src/main/java-templates</sourceDirectory>
+                <outputDirectory>${project.build.directory}/generated-sources/java-templates
+                </outputDirectory>
+              </configuration>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.codehaus.mojo</groupId>
+          <artifactId>flatten-maven-plugin</artifactId>
+          <version>1.1.0</version>
+          <configuration>
+            <flattenMode>ossrh</flattenMode>
+            <updatePomFile>true</updatePomFile>
+          </configuration>
+          <executions>
+            <execution>
+              <id>flatten</id>
+              <phase>process-resources</phase>
+              <goals>
+                <goal>flatten</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.xolstice.maven.plugins</groupId>
+          <artifactId>protobuf-maven-plugin</artifactId>
+          <version>0.5.0</version>
+          <configuration>
+            <protocArtifact>com.google.protobuf:protoc:${protobuf.version}:exe:${os.detected.classifier}
+            </protocArtifact>
+            <pluginId>grpc-java</pluginId>
+            <pluginArtifact>io.grpc:protoc-gen-grpc-java:${grpc.version}:exe:${os.detected.classifier}
+            </pluginArtifact>
+          </configuration>
+          <executions>
+            <execution>
+              <goals>
+                <goal>compile</goal>
+                <goal>compile-custom</goal>
+              </goals>
+            </execution>
+          </executions>
+        </plugin>
+        <plugin>
+          <groupId>org.jacoco</groupId>
+          <artifactId>jacoco-maven-plugin</artifactId>
+          <version>${jacoco.version}</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
     <plugins>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-compiler-plugin</artifactId>
-        <version>3.6.0</version>
         <configuration>
-          <source>1.8</source>
-          <target>1.8</target>
+          <source>${maven.compiler.source}</source>
+          <target>${maven.compiler.target}</target>
         </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>flatten-maven-plugin</artifactId>
+        <version>1.1.0</version>
+        <configuration>
+          <flattenMode>ossrh</flattenMode>
+          <updatePomFile>true</updatePomFile>
+        </configuration>
+        <executions>
+          <execution>
+            <id>flatten</id>
+            <phase>process-resources</phase>
+            <goals>
+              <goal>flatten</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-checkstyle-plugin</artifactId>-->
+<!--        <configuration>-->
+<!--          <configLocation>${rootPOM}/dev/checkstyle/checkstyle.xml</configLocation>-->
+<!--          <suppressionsLocation>${rootPOM}/dev/checkstyle/suppressions.xml</suppressionsLocation>-->
+<!--          <suppressionsFileExpression>checkstyle.suppressions.file</suppressionsFileExpression>-->
+<!--          &lt;!&ndash; Ensure generated source files are not style-checked &ndash;&gt;-->
+<!--          <includeTestSourceDirectory>true</includeTestSourceDirectory>-->
+<!--          <encoding>UTF-8</encoding>-->
+<!--          <consoleOutput>true</consoleOutput>-->
+<!--          <failsOnError>true</failsOnError>-->
+<!--          <linkXRef>false</linkXRef>-->
+<!--          <outputFile>-->
+<!--            ${project.build.directory}/reports/checkstyle/checkstyle-errors.xml-->
+<!--          </outputFile>-->
+<!--        </configuration>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>checkstyle</id>-->
+<!--            <phase>validate</phase>-->
+<!--            <goals>-->
+<!--              <goal>check</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--      </plugin>-->
+<!--      <plugin>-->
+<!--        <groupId>org.codehaus.mojo</groupId>-->
+<!--        <artifactId>findbugs-maven-plugin</artifactId>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>check</id>-->
+<!--            <phase>compile</phase>-->
+<!--            <goals>-->
+<!--              <goal>check</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--        <configuration>-->
+<!--          <findbugsXmlOutput>true</findbugsXmlOutput>-->
+<!--          <failOnError>true</failOnError>-->
+<!--          <xmlOutput>true</xmlOutput>-->
+<!--          <excludeFilterFile>${rootPOM}/dev/findbugs/findbugs-exclude.xml</excludeFilterFile>-->
+<!--          <threshold>Low</threshold>-->
+<!--          <effort>100</effort>-->
+<!--          <findbugsXmlOutputDirectory>${rootPOM}/reports/findbugs/-->
+<!--          </findbugsXmlOutputDirectory>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
+<!--      <plugin>-->
+<!--        <groupId>org.apache.maven.plugins</groupId>-->
+<!--        <artifactId>maven-enforcer-plugin</artifactId>-->
+<!--        <executions>-->
+<!--          <execution>-->
+<!--            <id>enforce-versions</id>-->
+<!--            <goals>-->
+<!--              <goal>enforce</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
+<!--        </executions>-->
+<!--        <configuration>-->
+<!--          <rules>-->
+<!--            <DependencyConvergence/>-->
+<!--            <bannedDependencies>-->
+<!--              <searchTransitive>true</searchTransitive>-->
+<!--              <excludes>-->
+<!--                <exclude>org.slf4j:slf4j-log4j12</exclude>-->
+<!--                <exclude>org.slf4j:slf4j-log4j13</exclude>-->
+<!--              </excludes>-->
+<!--              <includes>-->
+<!--                <include>org.apache.logging.log4j:log4j-core:${version.log4j}</include>-->
+<!--                <include>org.apache.logging.log4j:log4j-slf4j-impl:${version.log4j}</include>-->
+<!--              </includes>-->
+<!--              <message>must use log4j2</message>-->
+<!--            </bannedDependencies>-->
+<!--          </rules>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
+      <plugin>
+        <groupId>pl.project13.maven</groupId>
+        <artifactId>git-commit-id-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>templating-maven-plugin</artifactId>
+      </plugin>
+      <plugin>
+        <groupId>org.xolstice.maven.plugins</groupId>
+        <artifactId>protobuf-maven-plugin</artifactId>
       </plugin>
     </plugins>
   </build>
+
+  <profiles>
+    <profile>
+      <id>jacoco</id>
+      <dependencies>
+        <dependency>
+          <!-- to use instrument, jacoco must be on the classpath -->
+          <groupId>org.jacoco</groupId>
+          <artifactId>org.jacoco.agent</artifactId>
+          <classifier>runtime</classifier>
+          <scope>test</scope>
+        </dependency>
+      </dependencies>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <configuration>
+              <!--
+                  Append all coverage data into a single .exec file, so the reports include
+                  integration test results. The report generation should happen in a separate,
+                  later stage, so the coverage data is complete with the results of all the tests
+                  in the project.
+               -->
+              <append>true</append>
+              <destFile>${basedir}/target</destFile>
+            </configuration>
+            <executions>
+              <execution>
+                <!-- offline instrumentation is required, for jacoco to work with powermock tests -->
+                <id>jacoco-unit-instrument-classes</id>
+                <goals>
+                  <goal>instrument</goal>
+                </goals>
+              </execution>
+              <execution>
+                <!-- offline instrumentation is required, for jacoco to work with powermock tests -->
+                <id>jacoco-unit-restore-instrumented-classes</id>
+                <phase>test</phase>
+                <goals>
+                  <goal>restore-instrumented-classes</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+
+    <profile>
+      <id>jacocoReport</id>
+      <!--
+          This profile depends on the generated coverage data from the jacoco profile (test phase).
+          This should be run as a separate step, since the generated coverage data should include
+          the results from all the tests in the project.
+       -->
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.jacoco</groupId>
+            <artifactId>jacoco-maven-plugin</artifactId>
+            <executions>
+              <execution>
+                <id>jacoco-coverage-report</id>
+                <goals>
+                  <goal>report</goal>
+                </goals>
+                <configuration>
+                </configuration>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
 
 </project>

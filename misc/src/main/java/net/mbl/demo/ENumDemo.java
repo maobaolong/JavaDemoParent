@@ -9,6 +9,13 @@ public class ENumDemo {
     System.out.println(FailureDomain.NODE.name());
     FailureDomain failureDomain = FailureDomain.valueOf("RACK");
     System.out.println(failureDomain);
+
+    String enumName = "nonono";
+    try {
+      System.out.println(FailureDomain.valueOf("nonono"));
+    } catch (IllegalArgumentException e) {
+      throw new RuntimeException("No such component " + enumName);
+    }
   }
 
   protected enum FailureDomain {
