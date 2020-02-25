@@ -85,6 +85,7 @@
       <module>stateless4j</module>
       <module>yarnstatemachine</module>
       <module>grpc-full</module>
+    <module>hcfsfuse</module>
   </modules>
   <dependencyManagement>
     <dependencies>
